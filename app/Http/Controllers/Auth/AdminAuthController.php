@@ -64,7 +64,7 @@ class AdminAuthController extends Controller
             $user = auth()->guard('admin')->user();
             app()->setLocale("en");
             \Session::put('success','You are Login successfully!!');
-            return redirect()->to('/en/admin/articles');
+            return redirect()->to('/en/admin/categories');
             
         } else {
             return back()->with('error','your username and password are wrong.');
