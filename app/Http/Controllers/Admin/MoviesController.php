@@ -14,13 +14,13 @@ class MoviesController extends Controller
    //*** JSON Request
  public function datatables(Request $request)
  {
-      $datas = Movie::orderBy('id','desc')->get();
+      $datas = Movie::orderBy('id','desc');
       //--- Integrating This Collection Into Datatables
       return Datatables::of($datas)
-          ->addColumn('image', function(Movie $data) {
+          ->addColumn('image', function($data) {
               return '<img src="' . $data->image . '" alt="' . $data->name . '" style="width: 100px;">';
           })
-          ->addColumn('status', function(Movie $data) {
+          ->addColumn('status', function($data) {
               $stausBox ='';
               $statusActi = 0;
               if($data->status == 1) {
@@ -38,13 +38,25 @@ class MoviesController extends Controller
 
               return $stausBox;
           })
-          ->addColumn('options', function(Movie $data) {
+          ->addColumn('options', function($data) {
               return '<a class="btn btn-icon btn-info btn-round" href="'.route("movies.edit", [app()->getLocale(), $data->uuid]).'"><i class="fa fa-pencil" ></i></a>
               <button class="btn btn-icon btn-danger btn-round" onclick="deleteMovie('.$data->id.')"  href=""><i class="fa fa-trash mx-1" ></i></button>';
           })
-          
+          ->filterColumn('id', function ($query, $keyword) {
+            $query->where('id', 'LIKE', "%$keyword%");
+        })
+          ->filterColumn('title', function ($query, $keyword) {
+            $query->where('title', 'LIKE', "%$keyword%");
+        })
+          ->filterColumn('title_ar', function ($query, $keyword) {
+            $query->where('title_ar', 'LIKE', "%$keyword%");
+        })
+    
+
           ->rawColumns(['image', 'status', 'options'])
-          ->toJson(); //--- Returning Json Data To Client Side
+          ->make(true);
+
+
 }
 
     public function index()

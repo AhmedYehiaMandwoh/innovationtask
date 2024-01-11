@@ -53,6 +53,8 @@
     "home": "Home",
     "Image": "Image",
     "users": "Users",
+    "email": "Email",
+    "password": "Password",
     "add_new_user": "Add new user",
     "video_link": "Video link",
     "Select": "Select",

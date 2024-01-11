@@ -34,7 +34,7 @@
                         @csrf
                         <div class="row">
                             
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 <label for="exampleInputEmail1">{{ __('name') }}</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror"
                                     name="name" id="name" value="{{ old('name') }}">
@@ -49,9 +49,9 @@
                                     </span>
                                 @enderror
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 <label for="exampleInputEmail1">{{ __('email') }}</label>
-                                <input type="text" dir="rtl"
+                                <input type="email"
                                     class="form-control @error('email') is-invalid @enderror" name="email"
                                     id="email" value="{{ old('email') }}">
                                 @if (!$errors->has('email'))
@@ -66,9 +66,9 @@
                                 @enderror
                             </div>
                     
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-4">
                                 <label for="exampleInputEmail1">{{ __('password') }}</label>
-                                <input type="text" class="form-control @error('password') is-invalid @enderror"
+                                <input type="password" class="form-control @error('password') is-invalid @enderror"
                                     name="password" id="password" value="{{ old('password') }}">
                                 @if (!$errors->has('password'))
                                     <span class="invalid-feedback d-none" role="alert">
